@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
     d[0]=(byte)0x83;d[1]=(byte)0x06;d[2]=(byte)((f&7)|4|(sleep.isChecked()?8:0)|(swing.isChecked()?128:0));
     d[3]=(byte)((m&7)|((t-16)<<4));d[5]=(byte)(turbo.isChecked()?0x90:0);
     d[6]=(byte)(light.isChecked()?0x80:0xA0);d[8]=(byte)(swing.isChecked()?0x40:0);d[15]=(byte)2;d[18]=(byte)0x38;
-    d[13]=xor(d,2,11);d[20]=xor(d,14,19);
+    d[13]=(byte)xor(d,2,11);d[20]=(byte)xor(d,14,19);
     send(make(d),frequency(),"Manual "+m+" "+t+"C");
   }
   int xor(byte[] a,int x,int y){int v=0;for(int i=x;i<=y;i++)v^=a[i]&255;return v;}

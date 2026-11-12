@@ -1,0 +1,12 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'com.gogi.hisenseirexplorer'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.gogi.hisenseirexplorer'
+        minSdk 23
+        targetSdk 29
+        versionCode 1
+        versionName '1.0'
+    }
+}

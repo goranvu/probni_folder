@@ -42,9 +42,9 @@ public class MainActivity extends Activity {
   Button button(LinearLayout p,String s){Button b=new Button(this);b.setText(s);b.setAllCaps(false);p.addView(b);return b;}
   int frequency(){return new int[]{38000,36000,40000,56000}[freq.getSelectedItemPosition()];}
   void transmitState(){int m=mode.getSelectedItemPosition(),t=16+temp.getProgress(),f=fan.getProgress();byte[] d=new byte[21];
-    d[0]=(byte)0x83;d[1]=0x06;d[2]=(byte)((f&7)|4|(sleep.isChecked()?8:0)|(swing.isChecked()?128:0));
+    d[0]=(byte)0x83;d[1]=(byte)0x06;d[2]=(byte)((f&7)|4|(sleep.isChecked()?8:0)|(swing.isChecked()?128:0));
     d[3]=(byte)((m&7)|((t-16)<<4));d[5]=(byte)(turbo.isChecked()?0x90:0);
-    d[6]=(byte)(light.isChecked()?0x80:0xA0);d[8]=(byte)(swing.isChecked()?0x40:0);d[15]=2;d[18]=0x38;
+    d[6]=(byte)(light.isChecked()?0x80:0xA0);d[8]=(byte)(swing.isChecked()?0x40:0);d[15]=(byte)2;d[18]=(byte)0x38;
     d[13]=xor(d,2,11);d[20]=xor(d,14,19);
     send(make(d),frequency(),"Manual "+m+" "+t+"C");
   }
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
     else if(kind==2)label="Cool "+(16+index)+"C";
     else if(kind==3)label="Fan "+index;
     else label=new String[]{"Swing","Sleep","Turbo","Light"}[index];
-    byte[] d=new byte[21];d[0]=(byte)0x83;d[1]=6;d[2]=4;d[3]=(byte)(2|((24-16)<<4));d[6]=(byte)0x80;d[18]=0x38;d[15]=2;
+    byte[] d=new byte[21];d[0]=(byte)0x83;d[1]=(byte)6;d[2]=4;d[3]=(byte)(2|((24-16)<<4));d[6]=(byte)0x80;d[18]=(byte)0x38;d[15]=(byte)2;
     if(kind==1)d[3]=(byte)((index&7)|((24-16)<<4));
     if(kind==2)d[3]=(byte)(2|((16+index-16)<<4));
     if(kind==3)d[2]=(byte)(4|(index&7));

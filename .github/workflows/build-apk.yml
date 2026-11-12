@@ -12,9 +12,10 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
-      - name: Install Android SDK
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Install Android SDK platform
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
       - name: Install Gradle
         run: |
           curl -fsSLo /tmp/gradle.zip https://services.gradle.org/distributions/gradle-8.9-bin.zip
@@ -26,3 +27,4 @@ jobs:
         with:
           name: HisenseIRExplorer-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
